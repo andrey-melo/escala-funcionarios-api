@@ -1,0 +1,19 @@
+{
+    "name": "escala-funcionarios.api",
+    "version": "1.0.0",
+    "description": "Escala automatizada de funcionarios",
+    "main": "index.js",
+    "scripts": {
+        "dev": "npx nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Andrey Melo <andreyferreirams@gmail.com>",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^14.2.0",
+        "express": "^4.17.2",
+        "mongoose": "^6.1.7",
+        "nodemon": "^2.0.15"
+    }
+}
