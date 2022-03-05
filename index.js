@@ -24,33 +24,27 @@ const escalaSchema = new mongoose.Schema({
     domingo: Boolean,
 })
 
-const escalaModel = mongoose.model("Escala", escalaSchema)
+const funcionarioModel = mongoose.model("Escala", escalaSchema)
 
 
 api.get("/", (req, res) => {
     res.json({ mensagem: "Ótima semana de trabalho" })
 })
 api.get("/funcionarios", async(req, res) => {
-    const resultado = await escalaModel.find({})
+    const resultado = await funcionarioModel.find({})
     res.json(resultado)
 })
 api.post("/funcionarios", async(req, res) => {
-    const resultado = await escalaModel.create(req.body)
-    res.json({ mensagem: "Funcionário cadastrado com sucesso!" })
-})
-api.put("/funcionarios/:id", async(req, res) => {
-    const resultado = await escalaModel.findByIdAndUpdate(req.params.id, {
-        nome: req.params.nome,
-        turno: req.params.turno,
-        folga: req.params.folga,
-        domingo: req.params.domingo
-    })
-    res.json({ mensagem: "Funcionário editado com sucesso!" })
+    let resultado
+    if (req.body._id) {
+        resultado = await funcionarioModel.findByIdAndUpdate(req.body._id, req.body)
+    } else resultado = await funcionarioModel.create(req.body)
 
-
+    res.json({ mensagem: "Funcionário salvo com sucesso!" })
 })
+
 api.delete("/funcionarios/:id", async(req, res) => {
-    const resultado = await escalaModel.findByIdAndRemove({ _id: req.params.id })
+    const resultado = await funcionarioModel.findByIdAndRemove({ _id: req.params.id })
     res.json(resultado)
 })
 
