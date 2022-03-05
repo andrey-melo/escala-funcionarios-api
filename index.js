@@ -38,6 +38,21 @@ api.post("/funcionarios", async(req, res) => {
     const resultado = await escalaModel.create(req.body)
     res.json({ mensagem: "Funcionário cadastrado com sucesso!" })
 })
+api.put("/funcionarios/:id", async(req, res) => {
+    const resultado = await escalaModel.findByIdAndUpdate(req.params.id, {
+        nome: req.params.nome,
+        turno: req.params.turno,
+        folga: req.params.folga,
+        domingo: req.params.domingo
+    })
+    res.json({ mensagem: "Funcionário editado com sucesso!" })
+
+
+})
+api.delete("/funcionarios/:id", async(req, res) => {
+    const resultado = await escalaModel.findByIdAndRemove({ _id: req.params.id })
+    res.json(resultado)
+})
 
 api.listen(PORT, () => {
     console.log("API Ligada na porta " + PORT)
